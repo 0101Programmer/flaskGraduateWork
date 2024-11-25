@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block navbar_nav %}
+
+  <li class="nav-item">
+    <a class="nav-link" href="/">Главная страница</a>
+  </li>
+  <li class="nav-item active">
+      <a class="nav-link" href="#">Дашборд</a>
+  </li>
+
+{% endblock %}
+
+{% block content %}
+<h1>Ваша страница для заметок</h1>
+<br>
+<h5>Создать новую заметку</h5>
+<form method="post" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label for="note_header" class="form-label">Заголовок</label>
+    <input type="text" class="form-control" id="note_header" name="note_header" required>
+  </div>
+  <div class="mb-3">
+    <label for="note_description" class="form-label">Описание</label>
+    <input type="text" class="form-control" id="note_description" name="note_description" required>
+  </div>
+  <div class="mb-3">
+    <label for="note_photo">Вы также можете прикрепить фото</label>
+    <br>
+    <input type="file" id="note_photo" name="note_photo" />
+  </div>
+  <div class="text-center">
+    <button type="submit" name="add_note" class="btn btn-primary">Создать заметку</button>
+  </div>
+</form>
+<br>
+
+
+{% if current_posts %}
+<div class='row card-group'>
+{% for post_id, post in current_posts.items() %}
+  <div class="col-4" style="margin-bottom: 10px;">
+    <div class="card h-100 border border-dark">
+      <embed
+        src="./static/post_photos/{{ post.2 }}.jpg"
+        class="card-img-top"
+        alt="img"
+      />
+      <div class="card-body">
+        <h5 class="card-title">#{{ post_id }} | {{ post.0 }}</h5>
+        <p class="card-text">
+        {{ post.1 }}
+        </p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">{{ post.3 }}</small>
+        <br><br>
+        <form method="post">
+        {% if post.2 %}
+        <input type="text" class="form-control" hidden="hidden" value="./static/post_photos/{{ post.2 }}.jpg" id="note_pic" name="note_pic">
+        {% else %}
+        <input type="text" class="form-control" hidden="hidden" value="" id="note_pic" name="note_pic">
+        {% endif %}
+        <input type="number" class="form-control" hidden="hidden" value="{{ post_id }}" id="note_id" name="note_id" required>
+        <button type="submit" name="delete_note" class="btn btn-dark">Удалить заметку</button><br><br>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
+{% else %}
+<div class="text-center">
+  <p class="text-primary">У вас пока нет записей, сделайте их прямо сейчас!</p>
+</div>
+{% endif %}
+
+<div class="container text-center">
+    {% if current_posts %}
+    <div>
+    {% if page > 1 %}
+      <a href="/dashboard?page={{ page - 1 }}">Вернуться на предыдущую страницу</a>
+    {% endif %}
+    <br>
+    {% if page < 1 %}
+    Текущая страница : 1 из 1
+    {% elif total_pages < 1 %}
+    Текущая страница : 1 из 1
+    {% else %}
+    Текущая страница : {{ page }} из {{ total_pages }}
+    {% endif %}
+    <br>
+    {% if page < total_pages %}
+      <a href="/dashboard?page={{ page + 1 }}">Перейти на следующую страницу</a>
+    {% endif %}
+    </div>
+</div>
+{% endif %}
+<br>
+
+{% endblock %}

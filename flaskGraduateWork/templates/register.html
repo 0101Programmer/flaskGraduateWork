@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block navbar_nav %}
+  <li class="nav-item">
+    <a class="nav-link" href="/">Главная страница</a>
+  </li>
+  <li class="nav-item active">
+      <a class="nav-link" href="#">Регистрация</a>
+  </li>
+{% endblock %}
+
+{% block content %}
+<h1>Регистрация</h1>
+<form method="post">
+  <div class="mb-3">
+    <label for="last_name" class="form-label">Фамилия:</label>
+    <input type="text" class="form-control" id="last_name" name="last_name" required>
+  </div>
+  <div class="mb-3">
+    <label for="first_name" class="form-label">Имя:</label>
+    <input type="text" class="form-control" id="first_name" name="first_name" required>
+  </div>
+  <div class="mb-3">
+    <label for="patronymic" class="form-label">Отчество:</label>
+    <input type="text" placeholder="При наличии" class="form-control" id="patronymic" name="patronymic">
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Пароль:</label>
+    <input type="text" class="form-control" id="password" name="password" required>
+  </div>
+  <div class="mb-3">
+    <label for="password_confirmation" class="form-label">Поворите пароль:</label>
+    <input type="text" class="form-control" id="password_confirmation" name="password_confirmation" required>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">E-mail:</label>
+    <input type="email" class="form-control" id="email" name="email" minlength="8"
+           title="Формат: user@example.com" pattern="^\S+@\S+\.\S+$"
+           oninvalid="this.setCustomValidity('Пожалуйста, введите корректный адрес электронной почты.')"
+           onchange="this.setCustomValidity('')" required>
+  </div>
+  <div class="mb-3">
+    <label for="date_of_birthday">Дата рождения:</label><br>
+    <input type="date" id="date_of_birthday" name="date_of_birthday" required />
+  </div>
+  <div class="text-center">
+    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+  </div>
+</form>
+<br>
+<div class="text-center">
+  <p>
+    Уже зарегистрированы?
+    <br><br>
+    <a class="btn btn-primary" href="/login">Войти</a>
+  </p>
+</div>
+{% endblock %}

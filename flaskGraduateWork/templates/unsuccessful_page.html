@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>При заполнении данных что-то пошло не так</h1>
+  <p>
+    {{ some_error }}.
+  </p>
+<button class="btn btn-primary" onclick="window.history.back()">Назад</button>
+{% endblock %}

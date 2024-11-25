@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block navbar_nav %}
+
+{% if auth_user %}
+  <li class="nav-item active">
+    <a class="nav-link" href="/">Главная страница</a>
+  </li>
+  <li class="nav-item">
+      <a class="nav-link" href="/dashboard">Дашборд</a>
+  </li>
+  <li class="nav-item">
+      <a class="nav-link" href="/logout">Выход из аккаунта</a>
+  </li>
+{% else %}
+  <li class="nav-item active">
+      <a class="nav-link" href="#">Главная страница</a>
+  </li>
+  <li class="nav-item">
+      <a class="nav-link" href="/login">Авторизация</a>
+  </li>
+  <li class="nav-item">
+      <a class="nav-link" href="/register">Регистрация</a>
+  </li>
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+{% if messages %}
+<h1>{{ messages.hello }}.</h1>
+{% else %}
+<h1>Добро пожаловать на Flask Notes Platform!</h1>
+{% endif %}
+<p>
+  {% if messages %}
+  Рады приветствовать вас на Flask Notes Platform!
+  <br>
+  {{ messages.date }}<br>
+  {{ messages.wish }}!
+  {% else %}
+  Здесь можно создавать заметки, редактировать или удалять их, а также прикреплять к ним фото.
+  <br>
+  Авторизируйтесь или пройдите быструю регистрацию прямо сейчас!
+  {% endif %}
+</p>
+{% endblock %}

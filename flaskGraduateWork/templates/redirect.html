@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if redirect_time %}
+<meta http-equiv="refresh" content="{{ redirect_time }};url={{ redirect_url }}">
+{% else %}
+<meta http-equiv="refresh" content="1;url=/">
+{% endif %}
+{% if redirect_message %}
+<div class="text-center">
+  <p class="text-primary">{{ redirect_message }}</p>
+</div>
+{% else %}
+Redirection
+{% endif %}
+{% endblock %}
+
+
+<?php
+/*
+line to comment out
+
+connection = sqlite3.connect('database.db')
+    cursor = connection.cursor()
+    cursor.execute("SELECT is_authorized FROM Users WHERE is_authorized = ?", (1,))
+    result = cursor.fetchone()
+    connection.close()
+    if result:
+        if result[0] == 1:
+            redirect_time = 1
+            redirect_url = '/dashboard'
+            redirect_message = ('Вы уже прошли успешную регистрацию и будете перенаправлены на личную страницу через '
+                                'несколько секунд!')
+            return render_template('redirect.html', redirect_time=redirect_time, redirect_url=redirect_url, redirect_message=redirect_message)
+
+*/
+?>

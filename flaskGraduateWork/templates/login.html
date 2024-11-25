@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block navbar_nav %}
+  <li class="nav-item">
+    <a class="nav-link" href="/">Главная страница</a>
+  </li>
+  <li class="nav-item active">
+      <a class="nav-link" href="#">Авторизация</a>
+  </li>
+{% endblock %}
+
+{% block content %}
+<h1>Авторизация</h1>
+<form method="post">
+  <div class="mb-3">
+    <label for="email" class="form-label">E-mail:</label>
+    <input type="email" class="form-control" id="email" name="email" minlength="8"
+           title="Формат: user@example.com" pattern="^\S+@\S+\.\S+$"
+           oninvalid="this.setCustomValidity('Пожалуйста, введите корректный адрес электронной почты.')"
+           onchange="this.setCustomValidity('')" required>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Пароль:</label>
+    <input type="text" class="form-control" id="password" name="password" required>
+  </div>
+  <div class="text-center">
+    <button type="submit" class="btn btn-primary">Авторизироваться</button>
+  </div>
+</form>
+{% endblock %}
